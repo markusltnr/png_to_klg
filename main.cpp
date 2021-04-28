@@ -63,6 +63,8 @@ void convertToKlg(
 
     int32_t numFrames = (int32_t)vec_info.size();
 
+    std::cout << "Number of frames: " << numFrames << std::endl;
+
     fwrite(&numFrames, sizeof(int32_t), 1, logFile);
 
     //CvMat *encodedImage = 0;
@@ -85,10 +87,9 @@ void convertToKlg(
 
         int32_t depthSize = depth.total() * depth.elemSize();
 
-        std::string strAbsPath = std::string(
-                    getcwd(NULL, 0)) + "/" +
-                    it->second.second;
+        std::string strAbsPath = it->second.second;
 
+	std::cout << "image path " << strAbsPath.c_str() << std::endl;
         IplImage *img = 
             cvLoadImage(strAbsPath.c_str(), 
                         CV_LOAD_IMAGE_UNCHANGED);
@@ -150,6 +151,7 @@ int parseInfoFile(
     ssize_t read;
     
     FILE *pFile = fopen(strAssociation_Path.c_str(), "r");
+
     if(!pFile) {
         return -1;
     }
@@ -193,19 +195,24 @@ int parseInfoFile(
                         std::remove(token.begin(), 
                             token.end(), '.'), token.end());
                     //std::cout << token << std::endl;
-                    long long unsigned int numb;
+                    double numb;
                     std::istringstream ( token ) >> numb;
                     
+std::cout << std::setprecision(12) <<"numb " << numb << std::endl;
                     if(true == g_bFlag_TUM) 
                     {
                         timeSeq = (int64_t)numb;
-                        //timeSeq = iFrameCnt;
-                        iFrameCnt++;
+
                     }
                     else
                     {
+
                         timeSeq = numb * 1000000;
                     }
+
+std::cout << std::setprecision(12) <<"timeSeq " << timeSeq << std::endl;
+
+                    
                 }
                 else if(1 == iIdxToken)//depth path
                 {
