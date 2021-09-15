@@ -1,4 +1,12 @@
 cmake_minimum_required(VERSION 2.6.0)
+project(png_to_klg)
+
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+)
+
+
 
 set(OpenCV_DIR $ENV{OpenCV_DIR249})
 INCLUDE_DIRECTORIES($ENV{OpenCV_DIR249}/include)
@@ -16,7 +24,6 @@ INCLUDE_DIRECTORIES(${ZLIB_INCLUDE_DIR})
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_STATIC_RUNTIME OFF)
 set(BOOST_ALL_DYN_LINK ON) #force dynamic linking for all libraries
-
 
 add_executable(pngtoklg
                main.cpp)
