@@ -9,7 +9,7 @@ from png_to_klg.srv import PngToKlg
 def execute(req):
     print('Received request')
     plane = req.id 
-    folder = '/home/v4r/data/read_rosbag/plane_'+plane
+    folder = '/home/v4r/data/read_rosbag/plane_'+str(plane)
     print(folder)
     first_file = os.path.join(folder, 'planes/depth.txt')
     second_file = os.path.join(folder, 'planes/rgb.txt')
@@ -29,7 +29,7 @@ def execute(req):
 
     associations_file = open(os.path.join(folder, 'associations.txt'), 'w')
     associations_file.write(associations) 
-    cmd_pngtoklg = ['/pngtoklg/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+plane+'.klg','-s', '1000', '-t']
+    cmd_pngtoklg = ['/home/v4r/catkin_ws/devel/lib/png_to_klg/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg','-s', '1000', '-t']
     subprocess.call(cmd_pngtoklg,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print('Finished request')
     return True
