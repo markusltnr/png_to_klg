@@ -1,7 +1,9 @@
 #!/usr/bin/python
 import rospy
 import sys
-sys.path.append("..")
+import os.path
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from associate import read_file_list, associate
 import os
 import subprocess
