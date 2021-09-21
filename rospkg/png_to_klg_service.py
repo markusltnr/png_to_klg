@@ -33,7 +33,7 @@ def execute(req):
 
     associations_file = open(os.path.join(folder, 'associations.txt'), 'w')
     associations_file.write(associations) 
-    cmd_pngtoklg = ['/home/v4r/catkin_ws/devel/lib/png_to_klg/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg','-s', '1000', '-t']
+    cmd_pngtoklg = ['/home/v4r/catkin_ws/src/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg','-s', '1000', '-t']
     subprocess.call(cmd_pngtoklg,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     print('Finished request')
     return True
