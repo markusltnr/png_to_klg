@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import rospy
+import sys
+sys.path.append("..")
 from associate import read_file_list, associate
 import os
 import subprocess
