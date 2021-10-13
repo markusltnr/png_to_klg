@@ -41,7 +41,7 @@ def execute(req):
     first_file = os.path.join(folder, 'planes/depth.txt')
     second_file = os.path.join(folder, 'planes/rgb.txt')
     offset = 0
-    max_difference = 0.03
+    max_difference = 0.3
     print(first_file)
     first_list = read_file_list(first_file)
     second_list = read_file_list(second_file)
@@ -58,8 +58,8 @@ def execute(req):
     associations_file.write(associations) 
     cmd_pngtoklg = ['/home/v4r/catkin_ws/src/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg', '-s', '1000', '-t']
     
-    process = subprocess.Popen(cmd_pngtoklg,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
+    process = subprocess.Popen(cmd_pngtoklg)#,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process.wait()
     print('Finished request')
     return True
 
