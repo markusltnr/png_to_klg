@@ -40,8 +40,8 @@ def execute(req):
     print(folder)
     first_file = os.path.join(folder, 'planes/depth.txt')
     second_file = os.path.join(folder, 'planes/rgb.txt')
-    offset = 0
-    max_difference = 0.3
+    offset = rospy.get_param('/png_to_klg/offset', 0)
+    max_difference = rospy.get_param('/png_to_klg/max_difference', 0.3)
     print(first_file)
     first_list = read_file_list(first_file)
     second_list = read_file_list(second_file)
@@ -56,7 +56,8 @@ def execute(req):
 
     associations_file = open(os.path.join(folder, 'associations.txt'), 'w')
     associations_file.write(associations) 
-    cmd_pngtoklg = ['/home/v4r/catkin_ws/src/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg', '-s', '1000', '-t']
+    cmd_pngtoklg = ['/home/v4r/catkin_ws/src/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg']
+    cmd_pngtoklg.extend(rospy.get_params('/png_to_klg/call_params', ['-s', '1000', '-t']))
     
     process = subprocess.Popen(cmd_pngtoklg)#,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
