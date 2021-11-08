@@ -57,7 +57,7 @@ def execute(req):
     associations_file = open(os.path.join(folder, 'associations.txt'), 'w')
     associations_file.write(associations) 
     cmd_pngtoklg = ['/home/v4r/catkin_ws/src/png_to_klg/build/pngtoklg', '-w', folder, '-o' ,'plane_'+str(plane)+'.klg']
-    cmd_pngtoklg.extend(rospy.get_params('/png_to_klg/call_params', ['-s', '1000', '-t']))
+    cmd_pngtoklg.extend(rospy.get_param('/png_to_klg/call_params', ['-s', '1000', '-t']))
     
     process = subprocess.Popen(cmd_pngtoklg)#,stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     process.wait()
